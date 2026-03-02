@@ -5,6 +5,7 @@ const borderingCountries = document.getElementById("bordering-countries");
 const loadingSpinner = document.getElementById("loading-spinner");
 const errorMessage = document.getElementById("error-message");
 
+
 async function searchCountry(countryName){
 
     try{
@@ -13,7 +14,7 @@ async function searchCountry(countryName){
         countryInfo.textContent = "";
         countryInfo.classList.add('hidden');
         borderingCountries.classList.add('hidden');
-        borderingCountries.innerHTML = "";
+        borderingCountries.textContent = "";
         loadingSpinner.classList.remove('hidden');
         
 
@@ -42,16 +43,24 @@ async function searchCountry(countryName){
                 const borderData = await borderResponse.json();
                 const borderCountry = borderData[0];
 
-                borderingCountries.innerHTML += `
-                    <div class="border-card">
+
+                const borderCard = document.createElement('div');
+                borderCard.innerHTML = `
                         <h4>${borderCountry.name.common}</h4>
                         <img src="${borderCountry.flags.svg}" alt="${borderCountry.name.common} flag">
-                    <div>
                 `;
+
+                borderingCountries.appendChild(borderCard);
             }
 
             borderingCountries.classList.remove('hidden');
         }
+
+        else{
+            borderingCountries.innerHTML = "<p>No bordering countries.</p>"
+        }
+
+        borderingCountries.classList.remove('hidden');
 
     }
 
