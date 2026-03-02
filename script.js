@@ -6,14 +6,18 @@ const loadingSpinner = document.getElementById("loading-spinner");
 const errorMessage = document.getElementById("error-message");
 
 async function searchCountry(countryName){
+
     try{
-        if(!countryName){
-            throw new Error("Enter a country name.");
-        }
 
+        errorMessage.textContent = "";
+        countryInfo.textContent = "";
+        countryInfo.classList.add('hidden');
+        borderingCountries.classList.add('hidden');
+        borderingCountries.innerHTML = "";
         loadingSpinner.classList.remove('hidden');
+        
 
-        const response = await fetch(`https://restcountries.com/v3.1/name/${countryName}`);
+        const response = await fetch(`https://restcountries.com/v3.1/name/${countryName}?fullText=true`);
 
         if(!response.ok){
             throw new Error("Country not found.");
