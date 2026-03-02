@@ -57,7 +57,7 @@ async function searchCountry(countryName){
         }
 
         else{
-            borderingCountries.innerHTML = "<p>No bordering countries.</p>"
+            borderingCountries.innerHTML = "<p>No bordering countries.</p>";
         }
 
         borderingCountries.classList.remove('hidden');
